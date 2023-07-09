@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS gyakorlo 10</title>
+</head>
+<body>
+<!-- --------------------------------TÖMBÖK-------------------------------------->
+
+    <p id = 'demo1'></p>
+    <p id = "demo2"></p>
+
+    <script>
+       let elemek = '["Mercedes", "Audi", "Opel", "Renault"]';
+       let elem = JSON.parse(elemek);
+       document.getElementById("demo1").innerHTML = elem[0];
+
+//.......................
+
+       let elemek2 = '{"Név":"Miky", "Kor":30, "Autó": ["Mercedes", "Audi", "Opel", "Renault"]}';
+       let elem2 = JSON.parse(elemek2);
+       document.getElementById("demo2").innerHTML = elemek2;         // ---> '{"Név":"Miky", "Kor":30, "Autó": ["Mercedes", "Audi", "Opel", "Renault"]}'       
+       document.getElementById("demo2").innerHTML = elemek2[2];      // Ebben az esetben karakterekre bontja. A nulladik karakter :  [0] = { 
+                                                                     // Beleszámítja az " " -t is                            tehát:  [1] = "
+                                                                     //                                                              [2] = N
+       document.getElementById("demo2").innerHTML = elemek2[-1];     // ---> undefined
+      
+                                                              
+       document.getElementById("demo2").innerHTML = elem2.Név;       // ---> Miky
+       document.getElementById("demo2").innerHTML = elem2.Kor;       // ---> 30
+       document.getElementById("demo2").innerHTML = elem2.Autó[0];   // ---> Mercedes
+                      
+</script>
+</body>
+<!-- ------------------------------------------------TÖMB HURKOLÁSA-------------------------------------------------->
+
+<body>
+    <p id = "demo3"></p>
+
+<script>
+     let elemek3 = '{"Név":"Minnie", "Kor":20, "Autók": ["Mercedes", "Audi", "Opel", "Renault"]}';
+     let elem3 = JSON.parse(elemek3);
+     let lista = "";
+
+     for ( let i in elem3.Autók){
+        lista += elem3.Autók[i] + ", " + "<br>";
+     }
+     document.getElementById("demo3").innerHTML = lista;   // ---> Mercedes,
+                                                           //      Audi,
+                                                           //      Opel,
+                                                           //      Renault,
+//..................
+                                                    
+     for ( let i in elem3){
+        lista += elem3[i] + ", "; 
+     }
+     document.getElementById("demo3").innerHTML = lista;  // ---> Minnie, 20, Mercedes,Audi,Opel,Renault,
+
+//..................
+
+    for (let i = 0; i < elem3.Autók.length; i++){
+        lista += elem3.Autók[i] + ", "; 
+    }
+    document.getElementById("demo3").innerHTML = lista;  // ---> Mercedes, Audi, Opel, Renault,
+
+</script>
+</body>
+<!-------------------------------------------------------------------------------------------------------->
+ <!-- <body>
+    <p id = "demo4"></p>    
+    <script>
+        let elemek4 = '{"Név" : "Mary", "Kor" : 22, "Város" : "Debrecen"}';
+        let elem4 = JSON.stringify(elemek4);
+        window.location  = "A lány adatai: " + elemek4;  // Nem volt elérhető a fájl
+    </script>
+</body>  --> 
+
+<!-- ---------------------------------------- TÁRGY HURKOLÁSA ----------------------------------------------->
+
+<!-- OBJEKTUMTULAJDONSÁGOK-->
+<body>
+    <p id = "demo5"></p>
+
+    <script>
+        let elemek4 = '{"Neve" : "Dodo", "Kora" : 10, "Címe" : "Bp"}';
+        let elem4 = JSON.parse(elemek4);
+        let lista4 = " ";
+        for (let x in elem4){
+            lista4 += x + ", ";
+        }
+        document.getElementById("demo5").innerHTML = lista4;  // --->  Név, Kor, Címe,
+
+    </script>
+</body>
+<hr>
+
+<!--TULAJDONSÁGÉRTÉKEK ELÉRÉSE-->
+
+<body>
+    
+<p id = "demo6"></p>
+
+<script>
+let elemek6 = '{"Név" : "Didi", "Kor" : 12, "Cím" : "Pécs"}';
+let elem6 = JSON.parse(elemek6);
+let lista6 = "";
+   for ( let x in elem6 ){
+   lista6 += elem6[x] + ", ";
+   }
+   document.getElementById("demo6").innerHTML = lista6; 
+</script>
+<hr>
+<!----------------------------------------------------------------------------------------------------------->
+
+<!-- ADATOK TÁROLÁSA : A JSON lehetővé teszi a JavaScript-objektumok szövegként történő tárolását.  -->
+<body>
+    
+    <p id="demo7"></p>
+    
+    <script>
+    // Storing data (adatok tárolása):
+    const myObj = { name: "John", age: 31, city: "New York" };
+    const myJSON = JSON.stringify(myObj);
+    localStorage.setItem("testJSON", myJSON);
+    
+    // Retrieving data (adatok lekérése):
+    let text = localStorage.getItem("testJSON");
+    let obj = JSON.parse(text);
+    document.getElementById("demo7").innerHTML = obj.name;
+    </script>
+
+</body>
+</html>
